@@ -1,0 +1,10 @@
+{% extends "base/base.html" %}
+
+{% block title %}アクセスできません | NAGOYAMESHI{% endblock %}
+
+{% block content %}
+  <h1>アクセスできません</h1>
+  <p>管理者はマイページを利用できません。</p>
+  <p><a href="{% url 'home' %}">トップへ戻る</a></p>
+  
+{% endblock %}

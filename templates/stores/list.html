@@ -1,0 +1,41 @@
+{% extends "base/base.html" %}
+
+{% block title %}店舗一覧 | NAGOYAMESHI{% endblock %}
+
+{% block content %}
+  <h1>店舗一覧</h1>
+
+  <ul>
+    {% for store in stores %}
+      <li style="margin-bottom: 16px;">
+        <h2 style="margin: 0;">
+          <a href="{% url 'store_detail' store.id %}">{{ store.name }}</a>
+        </h2>
+
+        <div>
+          カテゴリ：
+          {% with sc_list=store.storecategory_set.all %}
+            {% if sc_list %}
+              {% for sc in sc_list %}
+                <span>{{ sc.category.name }}</span>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            {% else %}
+              <span>未設定</span>
+            {% endif %}
+          {% endwith %}
+        </div>
+
+        <div>住所：{{ store.address }}</div>
+        <div>営業時間：{{ store.business_day }} / {{ store.business_hour }}</div>
+
+        {% if store.image %}
+          <div style="margin-top: 8px;">
+            <img src="{{ store.image.url }}" alt="{{ store.name }}" style="max-width: 320px;">
+          </div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>店舗がありません</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

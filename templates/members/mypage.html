@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block title %} マイページ | NAGOYAMESHI{% endblock %}
+
+{% block content %}
+  <h1>マイページ</h1>
+
+  <h2>プロフィール</h2>
+  
+  <p>
+    <a href="{% url 'member_edit' %}">プロフィール編集</a>
+    <a href="{% url 'account_edit' %}">メールアドレス編集</a>
+    <a href="{% url 'password_change' %}">パスワード編集</a>
+  </p>
+  
+  {% if profile %}
+    <ul>
+      <li>氏名：{{ profile.full_name }}</li>
+      <li>氏名（カナ）：{{ profile.full_name_kana }}</li>
+      <li>メールアドレス：{{ request.user.email|default:request.user.username }}</li>
+      <li>生年月日：{{ profile.birth_date|default:'未設定' }}</li>
+      <li>性別：{{ profile.get_gender_display|default:'未設定' }}</li>
+      <li>職業：{{ profile.occupation|default:'未設定' }}</li>
+    </ul>
+  {% else %}
+    <p>プロフィールが見つかりません</p>
+  {% endif %}
+
+  <hr>
+
+  <h2>予約一覧</h2>
+  <ul>
+    {% for r in reservations %}
+      <li>
+        {{ r.reserved_at }} /
+        {{ r.store.name }} /
+        {{ r.number_of_people }}名 /
+        {{ r.status }}
+      </li>
+    {% empty %}
+      <li>予約はありません</li>
+    {% endfor %}
+  </ul>
+
+  <h2>レビュー一覧</h2>
+  <ul>
+    {% for rv in reviews %}
+      <li>
+        {{ rv.created_at }} /
+        {{ rv.store.name }} /
+        {{ rv.rating }}点 /
+        {{ rv.title }}
+      </li>
+    {% empty %}
+      <li>レビューはまだありません</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

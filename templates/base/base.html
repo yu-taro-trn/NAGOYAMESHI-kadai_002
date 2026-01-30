@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}NAGOYAMESHI{% endblock %}</title>
+</head>
+<body>
+  {% include "base/_header.html" %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  {% include "base/_footer.html" %}
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ store.name }} | NAGOYAMESHI{% endblock %}
+
+{% block content %}
+  <p><a href="{% url 'home' %}">← 店舗一覧へ戻る</a></p>
+
+  <h1>{{ store.name }}</h1>
+
+  {% if avg_rating %}
+    <p>平均評価：{{ avg_rating|floatformat:1 }} / 5.0</p>
+  {% else %}
+    <p>平均評価：まだありません</p>
+  {% endif %}
+
+  {% if store.image %}
+    <div style="margin: 12px 0;">
+      <img src="{{ store.image.url }}" alt="{{ store.name }}" style="max-width: 480px;">
+    </div>
+  {% endif %}
+
+  <h2>店舗情報</h2>
+  <ul>
+    <li>住所：{{ store.address }}</li>
+    <li>電話番号：{{ store.phone_number }}</li>
+    <li>営業日：{{ store.business_day }}</li>
+    <li>営業時間：{{ store.business_hour }}</li>
+  </ul>
+
+  <h2>カテゴリ</h2>
+  <ul>
+    {% for sc in categories %}
+      <li>{{ sc.category.name }}</li>
+    {% empty %}
+      <li>未設定</li>
+    {% endfor %}
+  </ul>
+
+  <h2>レビュー</h2>
+  <ul>
+    {% for review in reviews %}
+      <li style="margin-bottom: 12px;">
+        <div>評価：{{ review.rating }} / 5</div>
+        <div><strong>{{ review.title }}</strong></div>
+        <div>{{ review.comment }}</div>
+        <div style="font-size: 0.9em;">投稿：{{ review.created_at }}</div>
+      </li>
+    {% empty %}
+      <li>レビューはまだありません</li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  {% if user.is_authenticated and not user.is_staff %}
+    <p>
+      <a href="#" style="display:inline-block; padding:8px 12px; border:1px solid #333;">
+        この店舗を予約する
+      </a>
+    </p>
+  {% else %}
+    <p>予約するには <a href="{% url 'member_login' %}">ログイン</a> が必要です。</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+
+{% block title %}会員登録 | NAGOYAMESHI{% endblock %}
+
+{% block content %}
+  <h1>会員登録</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div style="color:red;">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    <div>
+      <label>{{ form.email.label }}</label><br>
+      {{ form.email }}<br>
+      <div style="color:red;">{{ form.email.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.password1.label }}</label><br>
+      {{ form.password1 }}<br>
+      <div style="color:red;">{{ form.password1.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.password2.label }}</label><br>
+      {{ form.password2 }}<br>
+      <div style="color:red;">{{ form.password2.errors }}</div>
+    </div>
+
+    <hr>
+
+    <div>
+      <label>{{ form.full_name.label }}</label><br>
+      {{ form.full_name }}<br>
+      <div style="color:red;">{{ form.full_name.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.full_name_kana.label }}</label><br>
+      {{ form.full_name_kana }}<br>
+      <div style="color:red;">{{ form.full_name_kana.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.birth_date.label }}</label><br>
+      {{ form.birth_date }}<br>
+      <div style="color:red;">{{ form.birth_date.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.gender.label }}</label><br>
+      {{ form.gender }}<br>
+      <div style="color:red;">{{ form.gender.errors }}</div>
+    </div>
+
+    <div>
+      <label>{{ form.occupation.label }}</label><br>
+      {{ form.occupation }}<br>
+      <div style="color:red;">{{ form.occupation.errors }}</div>
+    </div>
+
+    <div style="margin-top: 12px;">
+      <button type="submit">登録する</button>
+    </div>
+  </form>
+
+  <p style="margin-top: 12px;">
+    すでにアカウントをお持ちですか？ <a href="{% url 'member_login' %}">ログイン</a>
+  </p>
+{% endblock %}
