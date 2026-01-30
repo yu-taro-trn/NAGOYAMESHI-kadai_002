@@ -95,8 +95,3 @@ NAGOYAMESHI/
 - Y.O
 - 前職：RPAエンジニア
 - 開発エンジニア転職に向けて学習中
-
-
-
-├ manage.py
-└ requirements.txt
