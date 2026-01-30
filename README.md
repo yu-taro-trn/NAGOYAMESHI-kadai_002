@@ -16,6 +16,11 @@ Djangoを用いたWebアプリ開発の学習として、
 
 ---
 
+## 要件定義書
+- [NAGOYAMESHI 要件定義書（PDF）](https://github.com/yu-taro-trn/NAGOYAMESHI-kadai_001)
+
+---
+
 ## アプリ概要
 NAGOYAMESHIは、名古屋のB級グルメ店を  
 **「探す・予約する・レビューする」** ことを目的としたWebアプリです。
